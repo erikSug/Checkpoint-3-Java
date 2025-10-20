@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -53,12 +54,32 @@ public class ToDoList extends Application {
             btnCanceled
         );
 
+        Label startArea = new Label("Selecione uma das opções");
+        StackPane contentArea = new StackPane(startArea);
+
+        btnNewTask.setOnAction(e -> contentArea.getChildren().setAll(getNewTask()));
+
 
         root.setLeft(leftMenu);
+        root.setCenter(contentArea);
+
+
         stage.setScene(scene);
         stage.show();
 
 
+    }
+    private VBox getNewTask(){
+        VBox vBox = new VBox(10);
+        vBox.setPadding(new Insets(10));
+
+        Label novaTarefa = new Label("Nova Tarefa");
+        novaTarefa.setPrefSize(150, 50);
+        novaTarefa.setAlignment(Pos.CENTER);
+        novaTarefa.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+
+        vBox.getChildren().setAll(novaTarefa);
+        return vBox;
     }
     public static void main(String[] args) {
         launch();
