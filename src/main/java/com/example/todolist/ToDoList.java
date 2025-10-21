@@ -7,7 +7,9 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -54,8 +56,8 @@ public class ToDoList extends Application {
             btnCanceled
         );
 
-        Label startArea = new Label("Selecione uma das opções");
-        StackPane contentArea = new StackPane(startArea);
+
+        StackPane contentArea = new StackPane(getNewTask());
 
         btnNewTask.setOnAction(e -> contentArea.getChildren().setAll(getNewTask()));
 
@@ -69,6 +71,26 @@ public class ToDoList extends Application {
 
 
     }
+    private VBox searchBar(){
+        VBox vBox = new VBox(10);
+        vBox.setPadding(new Insets(10));
+
+        Label buscadorTarefa = new Label("Buscador de Tarefas");
+        buscadorTarefa.setAlignment(Pos.CENTER);
+        buscadorTarefa.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+
+        HBox hBox = new HBox(100);
+        vBox.setPadding(new Insets(10));
+
+        TextField searchBar = new TextField();
+        searchBar.setPromptText("Pesquise uma tarefa...");
+        searchBar.setPrefWidth(300);
+        hBox.getChildren().setAll(searchBar);
+        vBox.getChildren().setAll(buscadorTarefa, hBox);
+        return vBox;
+
+
+    }
     private VBox getNewTask(){
         VBox vBox = new VBox(10);
         vBox.setPadding(new Insets(10));
@@ -78,7 +100,7 @@ public class ToDoList extends Application {
         novaTarefa.setAlignment(Pos.CENTER);
         novaTarefa.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
 
-        vBox.getChildren().setAll(novaTarefa);
+        vBox.getChildren().setAll(searchBar(),novaTarefa);
         return vBox;
     }
     public static void main(String[] args) {
