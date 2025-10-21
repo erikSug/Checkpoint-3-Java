@@ -3,11 +3,8 @@ package com.example.todolist;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -79,13 +76,18 @@ public class ToDoList extends Application {
         buscadorTarefa.setAlignment(Pos.CENTER);
         buscadorTarefa.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
 
-        HBox hBox = new HBox(100);
-        vBox.setPadding(new Insets(10));
+        HBox hBox = new HBox(10);
+        hBox.setPadding(new Insets(10));
 
         TextField searchBar = new TextField();
         searchBar.setPromptText("Pesquise uma tarefa...");
         searchBar.setPrefWidth(300);
-        hBox.getChildren().setAll(searchBar);
+        searchBar.setMaxWidth(300);
+
+        Button btnFiltrar = new Button("Filtrar");
+        btnFiltrar.setPrefSize(50, 15);
+
+        hBox.getChildren().setAll(searchBar, btnFiltrar);
         vBox.getChildren().setAll(buscadorTarefa, hBox);
         return vBox;
 
@@ -100,8 +102,85 @@ public class ToDoList extends Application {
         novaTarefa.setAlignment(Pos.CENTER);
         novaTarefa.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
 
-        vBox.getChildren().setAll(searchBar(),novaTarefa);
+
+        Label tituloTarefa = new Label("Titulo da Tarefa");
+        tituloTarefa.setAlignment(Pos.CENTER);
+        tituloTarefa.setFont(Font.font("Verdana",20));
+
+        TextField tfTituloTarefa = new TextField();
+        tfTituloTarefa.setPromptText("Digite o nome da tarefa");
+        tfTituloTarefa.setPrefWidth(300);
+        tfTituloTarefa.setMaxWidth(300);
+
+
+        Label nomeProjeto = new Label("Nome do projeto");
+        nomeProjeto.setAlignment(Pos.CENTER);
+        nomeProjeto.setFont(Font.font("Verdana",20));
+
+        TextField tfNomeProjeto= new TextField();
+        tfNomeProjeto.setPromptText("Digite o nome do projeto...");
+        tfNomeProjeto.setPrefWidth(300);
+        tfNomeProjeto.setMaxWidth(300);
+
+
+        Label prioridade = new Label("Prioridade");
+        prioridade.setAlignment(Pos.CENTER);
+        prioridade.setFont(Font.font("Verdana",20));
+
+        ComboBox<String> cbPriority = new ComboBox();
+        cbPriority.getItems().addAll("BAIXA", "MÉDIA", "ALTA");
+        cbPriority.setPromptText("Defina a prioridade desta tarefa...");
+        cbPriority.setPrefWidth(300);
+
+
+        Label date = new Label("Data");
+        date.setAlignment(Pos.CENTER);
+        date.setFont(Font.font("Verdana",20));
+
+        DatePicker dpData = new DatePicker();
+        dpData.setPromptText("Data do registro da tarefa...");
+        dpData.setPrefWidth(300);
+        dpData.setMaxWidth(300);
+
+
+        Label responsible = new Label("Responsável");
+        responsible.setAlignment(Pos.CENTER);
+        responsible.setFont(Font.font("Verdana",20));
+
+        TextField tfResponsible = new TextField();
+        tfResponsible.setPromptText("Defina o responsável pela tarefa...");
+        tfResponsible.setPrefWidth(300);
+        tfResponsible.setMaxWidth(300);
+
+
+        Button btnToDo = new Button("To Do");
+        btnToDo.setPrefSize(150,50);
+        btnToDo.setOnAction(e -> showAlert("Sucesso", "Tarefa Adicionada (Simulação)!"));
+
+        vBox.getChildren().setAll(
+                searchBar(),
+                novaTarefa,
+                tituloTarefa,
+                tfTituloTarefa,
+                nomeProjeto,
+                tfNomeProjeto,
+                prioridade,
+                cbPriority,
+                date,
+                dpData,
+                responsible,
+                tfResponsible,
+                btnToDo
+        );
+
+
         return vBox;
+    }
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(title);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
     public static void main(String[] args) {
         launch();
