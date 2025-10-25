@@ -57,7 +57,7 @@ public class ToDoList extends Application {
         StackPane contentArea = new StackPane(getNewTask());
 
         btnNewTask.setOnAction(e -> contentArea.getChildren().setAll(getNewTask()));
-
+        btnToDo.setOnAction(e -> contentArea.getChildren().setAll(getTarefa()));
 
         root.setLeft(leftMenu);
         root.setCenter(contentArea);
@@ -176,11 +176,28 @@ public class ToDoList extends Application {
 
         return vBox;
     }
+    private VBox getTarefa(){
+        VBox vBox = new VBox(10);
+        vBox.setPadding(new Insets(10));
+        vBox.getChildren().setAll(
+                searchBar(),
+                getTable()
+        );
+        return vBox;
+    }
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(title);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    private TableView<String> getTable() {
+        TableView<String> tableView = new TableView<>();
+        TableColumn<String, String> column = new TableColumn<>("Lista de Amigos (Simulação)");
+        tableView.getColumns().add(column);
+        tableView.getItems().addAll("Carlos", "Henrique", "Marco");
+        return tableView;
     }
     public static void main(String[] args) {
         launch();
