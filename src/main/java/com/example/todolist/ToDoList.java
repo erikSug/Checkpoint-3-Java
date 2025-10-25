@@ -1,5 +1,6 @@
 package com.example.todolist;
 
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -192,11 +193,33 @@ public class ToDoList extends Application {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    private TableView<String> getTable() {
-        TableView<String> tableView = new TableView<>();
-        TableColumn<String, String> column = new TableColumn<>("Lista de Amigos (Simulação)");
-        tableView.getColumns().add(column);
-        tableView.getItems().addAll("Carlos", "Henrique", "Marco");
+    private TableView<Tarefa> getTable() {
+        TableView<Tarefa> tableView = new TableView<>();
+
+        TableColumn<Tarefa, String> tarefaId = new TableColumn<>("Tarefa");
+        tarefaId.setCellValueFactory(new PropertyValueFactory<>("tarefaId"));
+
+        TableColumn<Tarefa, String> titulo = new TableColumn<>("Titulo");
+        titulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+
+        TableColumn<Tarefa, String> projeto = new TableColumn<>("Projeto");
+        projeto.setCellValueFactory(new PropertyValueFactory<>("projeto"));
+
+        TableColumn<Tarefa, String> prioridade = new TableColumn<>("Prioridade");
+        prioridade.setCellValueFactory(new PropertyValueFactory<>("prioridade"));
+
+        TableColumn<Tarefa, String> data = new TableColumn<>("Data");
+        data.setCellValueFactory(new PropertyValueFactory<>("data"));
+
+        TableColumn<Tarefa, String> responsavel = new TableColumn<>("Responsável");
+        responsavel.setCellValueFactory(new PropertyValueFactory<>("responsavel"));
+
+        tableView.getColumns().addAll(tarefaId, titulo, projeto, prioridade, data, responsavel);
+
+        tableView.getItems().addAll(
+              new Tarefa("FIG-201","Escreva um Blog para demonstração","GTM da Acne", "Alta","Dez 5", "Marcelo")
+        );
+
         return tableView;
     }
     public static void main(String[] args) {

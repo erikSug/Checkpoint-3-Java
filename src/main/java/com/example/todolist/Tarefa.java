@@ -1,6 +1,6 @@
 package com.example.todolist;
 
-class Tarefa {
+public class Tarefa {
     private String tarefaId;
     private String titulo;
     private String projeto;
